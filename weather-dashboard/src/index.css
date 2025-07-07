@@ -2,10 +2,9 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  background: linear-gradient(to bottom right, #203de3, rgb(200, 18, 200));
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,20 +17,59 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: flex;
-  min-width: 320px;
   min-height: 100vh;
+  display: block; /* 👈 Ya no usamos flex en body para centrar todo */
+}
+
+.contenedor-principal {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-css {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center; 
+  text-align: center;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.5em;
   line-height: 1.1;
+}
+
+.nube-icono {
+  width: 5rem;
+  height: auto;
+}
+
+.texto-header {
+  font-size: 18px;
+}
+
+.contenedor-principal .seccion-input {
+  border: 1px solid rgb(164, 158, 158);
+  padding: 10px;
+  text-align: left; 
+  align-self: flex-start; 
+  width: fit-content; 
+  border-radius: 8px; 
+}
+
+.input-busqueda {
+  border: 2px solid rgb(169, 166, 166);
+  margin: 2px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f3f3f5, #969698);
 }
 
 button {
@@ -41,27 +79,20 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #dbbaba;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  /* ajustes para modo claro */
 }

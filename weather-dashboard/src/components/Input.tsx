@@ -1,6 +1,7 @@
 import {useState} from "react";
 import fetchAPIGEO, { type GeocodeResults } from "../services/apiGeo";
 import "../stylesheet/input.css";
+
 const Input = () =>{
     const[query, setQuery] = useState("");
     const[coords, setCoords] = useState<{lat:number; lon:number} | null>(null);
@@ -47,7 +48,7 @@ const Input = () =>{
 
 
             <form onSubmit={handleSubmit}>
-                <input type="text" value={query} onChange={(e)=>{
+                <input className="input-busqueda" type="text" value={query} onChange={(e)=>{
                     setQuery(e.target.value);
                 }} placeholder="Escriba tu pais o ciudad"/>
                 <button type="submit" disabled={loading} > {loading? "Buscando": "Buscar"}  </button>
