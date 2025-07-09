@@ -1,8 +1,5 @@
 const BASE_URLGEO = import.meta.env.VITE_API_GEO_URL as string
 
-
-
-
 interface GeocodeResults{
     name:string;
     lat:number;

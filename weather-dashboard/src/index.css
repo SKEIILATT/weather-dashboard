@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   background: linear-gradient(to bottom right, #203de3, rgb(200, 18, 200));
@@ -25,7 +25,7 @@ a:hover {
 body {
   margin: 0;
   min-height: 100vh;
-  display: block; /* 👈 Ya no usamos flex en body para centrar todo */
+  display: block;
 }
 
 .contenedor-principal {
@@ -39,10 +39,11 @@ body {
   gap: 2rem;
   justify-content: center; 
   text-align: center;
+
 }
 
 h1 {
-  font-size: 3.5em;
+  font-size: 4.5em;
   line-height: 1.1;
 }
 
@@ -52,40 +53,36 @@ h1 {
 }
 
 .texto-header {
-  font-size: 18px;
+  font-size: 16px;
+  margin-top: 0;
 }
 
-.contenedor-principal .seccion-input {
-  border: 1px solid rgb(164, 158, 158);
-  padding: 10px;
-  text-align: left; 
-  align-self: flex-start; 
-  width: fit-content; 
-  border-radius: 8px; 
-}
+
 
 .input-busqueda {
-  border: 2px solid rgb(169, 166, 166);
+  border: 2px solid rgb(247, 246, 246);
   margin: 2px;
   padding: 10px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #f3f3f5, #969698);
+  background: linear-gradient(135deg, #f3f3f5, #d6d6d8);
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid white;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #dbbaba;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: white;
+  margin-left: 10px;
+  background: linear-gradient(to bottom right, #203de3, rgb(200, 18, 200));
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #5941df;
 }
 
 button:focus,

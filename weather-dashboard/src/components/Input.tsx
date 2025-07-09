@@ -1,8 +1,11 @@
 import {useState} from "react";
 import fetchAPIGEO, { type GeocodeResults } from "../services/apiGeo";
-import "../stylesheet/input.css";
 
-const Input = () =>{
+interface InputProps {
+    onLocationChange?: (label: string | null, timestamp: string) => void;
+}
+
+const Input = ({ onLocationChange }: InputProps) =>{
     const[query, setQuery] = useState("");
     const[coords, setCoords] = useState<{lat:number; lon:number} | null>(null);
     const[loading, setLoading] = useState(false);
@@ -27,7 +30,13 @@ const Input = () =>{
             const now = new Date();
             const date =now.toLocaleDateString("es-ES");
             const time = now.toLocaleTimeString("es-ES");
-            setTimestamp(`${date}, ${time}`);
+            const newTimestamp = `${date}, ${time}`;
+            setTimestamp(newTimestamp);
+            
+            // Enviar los datos al componente padre
+            if (onLocationChange) {
+                onLocationChange(result.name, newTimestamp);
+            }
         }
         catch(err:any){
             setError(err.message || "Error desconocido al obtener coordenadas");
@@ -37,34 +46,14 @@ const Input = () =>{
     };
     return(
         <div>
-            {label && (
-                <div className="input-container">
-                    <span>📍</span>
-                    <span> {label} </span>
-                    <span>⭐</span>
-                    <span>{timestamp}</span>
-                </div>
-            )}
-
-
             <form onSubmit={handleSubmit}>
                 <input className="input-busqueda" type="text" value={query} onChange={(e)=>{
                     setQuery(e.target.value);
                 }} placeholder="Escriba tu pais o ciudad"/>
-                <button type="submit" disabled={loading} > {loading? "Buscando": "Buscar"}  </button>
+                <button type="submit" disabled={loading}> {loading ? "Buscando" : "Buscar"}  </button>
             
             </form>
             {error && <p className="mt-4 text-red-500">⚠️ {error}</p>}
-
-            {coords && (
-                <div>
-                    <h3> Coordenadas encontradas </h3>
-                    <ul>
-                        <li>Latitud  {coords.lat} </li>
-                        <li>Longitud {coords.lon} </li>
-                    </ul>
-                </div>
-            )}
         </div>
     );
 };
