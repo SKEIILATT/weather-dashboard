@@ -2,7 +2,7 @@ import {useState} from "react";
 import fetchAPIGEO, { type GeocodeResults } from "../services/apiGeo";
 
 interface InputProps {
-    onLocationChange?: (label: string | null, timestamp: string) => void;
+    onLocationChange?: (label: string | null, timestamp: string, coords?: {lat: number, lon: number}) => void;
 }
 
 const Input = ({ onLocationChange }: InputProps) =>{
@@ -35,7 +35,7 @@ const Input = ({ onLocationChange }: InputProps) =>{
             
             // Enviar los datos al componente padre
             if (onLocationChange) {
-                onLocationChange(result.name, newTimestamp);
+                onLocationChange(result.name, newTimestamp, {lat: result.lat, lon: result.lon});
             }
         }
         catch(err:any){

@@ -1,16 +1,22 @@
-//Archivo que nos sirve para realizar las llamadas a la API general
-const BASE_URL = import.meta.env.VITE_API_BASE_URL as string
-//Función que nos permite realizar una llamada a la api general del clima
-export const fetchAPI =  async (path: string) =>{
-    try{
-        const respuesta = await fetch(`${BASE_URL}${path}`); 
-        if (!respuesta.ok){
-            throw new Error("No se obtuvo respuesta de la api");
-        }  
-        return await respuesta.json();
-    }
-    catch(error){
-        console.error("Ha ocurrido un error", error);
+const BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
+
+export const fetchAPI = async (path: string) => {
+    try {
+        const url = `${BASE_URL}${path}`;
+        console.log('Llamando a URL:', url); 
+        
+        const respuesta = await fetch(url);
+        
+        if (!respuesta.ok) {
+            
+            throw new Error(`API respondió con status ${respuesta.status}: ${respuesta.statusText}`);
+        }
+        
+        const data = await respuesta.json();
+        console.log('Respuesta de API:', data); 
+        return data;
+    } catch (error) {
+        console.error("Error en fetchAPI:", error);
+        throw error;
     }
 }
-

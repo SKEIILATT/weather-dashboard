@@ -1,5 +1,8 @@
 import Input from "./components/Input.tsx";
 import LocationDisplay from "./components/LocationDisplay.tsx";
+import CardInfo from "./components/CardInfo.tsx";
+import WeatherTrends from "./components/WeatherTrends.tsx";
+import WindPressureAnalysis from "./components/WindPressureAnalysis.tsx";
 import "./index.css";
 import Paper from '@mui/material/Paper';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
@@ -9,10 +12,20 @@ import cloud from "./assets/cloud.svg"
 export const App = () => {
     const [locationLabel, setLocationLabel] = useState<string | null>(null);
     const [locationTimestamp, setLocationTimestamp] = useState<string>("");
+    const [coords, setCoords] = useState<{lat: number, lon: number} | null>(null);
+    const [weatherData, setWeatherData] = useState<any>(null);
 
-    const handleLocationChange = (label: string | null, timestamp: string) => {
+    const handleLocationChange = (label: string | null, timestamp: string, coordinates?: {lat: number, lon: number}) => {
         setLocationLabel(label);
         setLocationTimestamp(timestamp);
+        if (coordinates) {
+            setCoords(coordinates);
+        }
+    };
+
+    // Función para recibir datos del clima desde CardInfo
+    const handleWeatherDataUpdate = (data: any) => {
+        setWeatherData(data);
     };
 
     return (
@@ -48,8 +61,18 @@ export const App = () => {
                 </div>
                 <Input onLocationChange={handleLocationChange}></Input>
             </Paper>
+            
+            {/* Componente CardInfo para mostrar el clima */}
+            <CardInfo 
+                lat={coords?.lat} 
+                lon={coords?.lon} 
+                locationName={locationLabel || undefined}
+                onWeatherDataUpdate={handleWeatherDataUpdate}
+            />
+
+            {/* Gráficos de análisis climático */}
+            <WeatherTrends weatherData={weatherData} />
+            <WindPressureAnalysis weatherData={weatherData} />
         </div>
     )
-
-
 }
