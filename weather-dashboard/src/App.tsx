@@ -1,8 +1,9 @@
-import Input from "./components/Input.tsx";
-import LocationDisplay from "./components/LocationDisplay.tsx";
-import CardInfo from "./components/CardInfo.tsx";
-import WeatherTrends from "./components/WeatherTrends.tsx";
-import WindPressureAnalysis from "./components/WindPressureAnalysis.tsx";
+import Input from "./components/Input";
+import LocationDisplay from "./components/LocationDisplay";
+import CardInfo from "./components/CardInfo";
+import WeatherTrends from "./components/WeatherTrends";
+import WindPressureAnalysis from "./components/WindPressureAnalysis";
+import ExtendedForecast from "./components/ExtendedForecast";
 import "./index.css";
 import Paper from '@mui/material/Paper';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
@@ -73,6 +74,17 @@ export const App = () => {
             {/* Gráficos de análisis climático */}
             <WeatherTrends weatherData={weatherData} />
             <WindPressureAnalysis weatherData={weatherData} />
+
+            {/*Componente ExtendedForecast para pronósticos extendidos*/}
+            <ExtendedForecast 
+                lat={coords?.lat} 
+                lon={coords?.lon} 
+                locationName={locationLabel || undefined}
+            />
+
+
+
+
         </div>
     )
 }

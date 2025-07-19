@@ -30,6 +30,18 @@ export interface WeatherData {
   };
 }
 
+// Nueva interfaz para pronóstico extendido
+export interface ExtendedForecastData {
+  daily: {
+    time: string[];
+    weather_code: number[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    precipitation_probability_mean: number[];
+    relative_humidity_2m_mean: number[];
+  };
+}
+
 // Función para convertir código WMO a descripción del clima
 const getWeatherCondition = (weatherCode: number): { text: string; icon: string } => {
   const weatherConditions: { [key: number]: { text: string; icon: string } } = {
@@ -154,6 +166,47 @@ export const getWeatherByCoordinates = async (lat: number, lon: number): Promise
     return formattedData;
   } catch (error) {
     console.error('Error en getWeatherByCoordinates:', error);
+    throw error;
+  }
+};
+
+// Nueva función para obtener pronóstico extendido
+export const getExtendedForecast = async (lat: number, lon: number): Promise<ExtendedForecastData> => {
+  try {
+    const weatherPath = `/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_mean,relative_humidity_2m_mean&timezone=auto&forecast_days=7`;
+    
+    const weatherData = await fetchAPI(weatherPath);
+    
+    if (!weatherData || !weatherData.daily) {
+      throw new Error('La API del clima no devolvió datos válidos para el pronóstico extendido');
+    }
+    
+    return weatherData as ExtendedForecastData;
+  } catch (error) {
+    console.error('Error en getExtendedForecast:', error);
+    throw error;
+  }
+};
+
+// Función para obtener pronóstico extendido por nombre de ubicación
+export const getExtendedForecastByLocation = async (locationName: string): Promise<{ forecast: ExtendedForecastData; location: { lat: number; lon: number; name: string } }> => {
+  try {
+    // Paso 1: Obtener coordenadas
+    const geocodeData: GeocodeResults = await fetchAPIGEO(locationName);
+    
+    // Paso 2: Obtener pronóstico extendido
+    const forecastData = await getExtendedForecast(geocodeData.lat, geocodeData.lon);
+    
+    return {
+      forecast: forecastData,
+      location: {
+        lat: geocodeData.lat,
+        lon: geocodeData.lon,
+        name: geocodeData.name
+      }
+    };
+  } catch (error) {
+    console.error('Error en getExtendedForecastByLocation:', error);
     throw error;
   }
 };
