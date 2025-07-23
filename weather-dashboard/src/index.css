@@ -31,6 +31,7 @@ body {
 .contenedor-principal {
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to bottom right, #203de3, rgb(200, 18, 200));
 }
 
 .header-css {
@@ -89,6 +90,13 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.footer-css {
+  text-align: center;
+  padding: 16px;
+  color: white;
+}
+
 
 @media (prefers-color-scheme: light) {
   /* ajustes para modo claro */

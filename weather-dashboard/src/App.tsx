@@ -5,6 +5,8 @@ import WeatherTrends from "./components/WeatherTrends";
 import WindPressureAnalysis from "./components/WindPressureAnalysis";
 import ExtendedForecast from "./components/ExtendedForecast";
 import DetailedConditionsAnalysis from "./components/DetailedConditionsAnalysis";
+import SmartRecommendations from "./components/SmartRecommendations";
+import TechnicalControlCenter from "./components/TechnicalControlCenter";
 import "./index.css";
 import Paper from '@mui/material/Paper';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
@@ -89,6 +91,22 @@ export const App = () => {
                 lon={coords?.lon} 
                 locationName={locationLabel || undefined}
             />
+            {/*Componente SmartRecommendations para mostrar recomendaciones inteligentes*/}
+            <SmartRecommendations
+                lat={coords?.lat} 
+                lon={coords?.lon} 
+                locationName={locationLabel || undefined}
+            />  
+
+            <TechnicalControlCenter
+                lat={coords?.lat} 
+                lon={coords?.lon}
+            />
+
+            <footer className="footer-css" >
+                <p>© 2025 Weather Dashboard. Todos los derechos reservados.</p>
+                <p>Potenciado por IA climática y análisis predictivo en tiempo real</p>
+            </footer>
 
 
 
