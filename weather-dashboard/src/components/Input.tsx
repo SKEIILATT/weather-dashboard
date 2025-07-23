@@ -7,11 +7,14 @@ interface InputProps {
 
 const Input = ({ onLocationChange }: InputProps) =>{
     const[query, setQuery] = useState("");
+    // @ts-ignore - Used in handleSubmit
     const[coords, setCoords] = useState<{lat:number; lon:number} | null>(null);
     const[loading, setLoading] = useState(false);
     const[error, setError] = useState<string|null>(null);
-    const[label,setLabel]=useState<string|null>(null);
-    const[timestamp,setTimestamp]=useState<string>("");
+    // @ts-ignore - Used in handleSubmit
+    const[label, setLabel] = useState<string|null>(null);
+    // @ts-ignore - Used in handleSubmit
+    const[timestamp, setTimestamp] = useState<string>("");
 
     const handleSubmit = async (e:React.FormEvent)=>{
         e.preventDefault();

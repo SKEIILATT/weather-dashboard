@@ -47,7 +47,7 @@ const getTrend = (): 'Subiendo' | 'Bajando' | 'Estable' => {
 };
 
 // Función para generar cambio reciente simulado
-const getRecentChange = (trend: string): string => {
+const getRecentChange = (): string => {
   const changes = [
     '+2°C en 2h', '-5% en 1h', '+3 km/h', 'Sin cambio', 
     '+5% en 1h', '-2°C en 3h', '+1 hPa', '+3 km/h'
@@ -77,7 +77,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: '°C',
         status: getParameterStatus('temperature', current.temperature_2m || 0),
         trend: getTrend(),
-        recentChange: getRecentChange('temperature'),
+        recentChange: getRecentChange(),
         description: 'Temperatura ambiente actual',
         icon: '🌡️'
       },
@@ -87,7 +87,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: '°C',
         status: getParameterStatus('apparent', current.apparent_temperature || 0),
         trend: getTrend(),
-        recentChange: getRecentChange('apparent'),
+        recentChange: getRecentChange(),
         description: 'Temperatura percibida por el cuerpo',
         icon: '🌡️'
       },
@@ -97,7 +97,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: '%',
         status: getParameterStatus('humidity', current.relative_humidity_2m || 0),
         trend: getTrend(),
-        recentChange: getRecentChange('humidity'),
+        recentChange: getRecentChange(),
         description: 'Humedad relativa del aire',
         icon: '💧'
       },
@@ -107,7 +107,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: getWindDirection(current.wind_direction_10m || 0),
         status: getParameterStatus('windSpeed', current.wind_speed_10m || 0),
         trend: getTrend(),
-        recentChange: getRecentChange('wind'),
+        recentChange: getRecentChange(),
         description: 'Velocidad y dirección del viento',
         icon: '💨'
       },
@@ -117,7 +117,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: 'km',
         status: 'Normal',
         trend: getTrend(),
-        recentChange: getRecentChange('visibility'),
+        recentChange: getRecentChange(),
         description: 'Distancia de visibilidad atmosférica',
         icon: '👁️'
       },
@@ -127,7 +127,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: 'hPa',
         status: getParameterStatus('pressure', current.surface_pressure || 1013),
         trend: getTrend(),
-        recentChange: getRecentChange('pressure'),
+        recentChange: getRecentChange(),
         description: 'Presión atmosférica a nivel del mar',
         icon: '📊'
       },
@@ -137,7 +137,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: '',
         status: getParameterStatus('uv', current.uv_index || 0),
         trend: getTrend(),
-        recentChange: getRecentChange('uv'),
+        recentChange: getRecentChange(),
         description: 'Intensidad de radiación ultravioleta',
         icon: '☀️'
       },
@@ -147,7 +147,7 @@ const fetchDetailedWeatherData = async (latitude: number, longitude: number): Pr
         unit: '°C',
         status: 'Normal',
         trend: getTrend(),
-        recentChange: getRecentChange('dew'),
+        recentChange: getRecentChange(),
         description: 'Temperatura de condensación del vapor',
         icon: '💧'
       }
